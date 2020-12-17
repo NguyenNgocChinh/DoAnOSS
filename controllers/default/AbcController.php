@@ -15,5 +15,11 @@ class AbcController extends Controller
 		}
 		$this->render('signin');
 	}
+		function signup(){
+		if(isset($_SESSION['user'])){
+			header('location: ../');
+		}
+		$this->render('signup');
+	}
 }
 ?>

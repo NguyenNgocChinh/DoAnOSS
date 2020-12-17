@@ -101,6 +101,9 @@ require_once 'vendor/Model.php';
 		$sql = "UPDATE thanhvien SET matkhau = '".$npw."' WHERE id = ".$_SESSION['user']['id'];
 		$md->exe_query($sql);
 	}
+	function viewinfo(){
+		$this->render('info');
+	}
 	
 	
 }

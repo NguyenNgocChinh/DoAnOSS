@@ -25,5 +25,16 @@ $result = array();
 			return $result;
 		}
 	}
+	function addUser($name, $un, $pw, $addr, $phone, $email){
+		//THEM USER 
+$now = new DateTime(null, new DateTimeZone('ASIA/Ho_Chi_Minh'));
+		$now = $now->format('Y-m-d H:i:s');
+		$sql = "INSERT INTO thanhvien (ten,tentaikhoan,matkhau,diachi,sodt,email,date,quyen) VALUES ('".$name."','".$un."','".$pw."','".$addr."','".$phone."','".$email."','".$now."','0')";
+		if(!$this->conn->query($sql)){
+			return false;
+		} else {
+			return true ;
+		}
+	}
 
 }

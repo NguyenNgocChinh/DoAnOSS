@@ -20,6 +20,15 @@ class IndexController extends Controller
 		
 		$this->render('index', $data);
 	}
+	function signin(){
+		echo "ASdda";
+		exit;
+
+		if(isset($_SESSION['user'])){
+			header('location: ../');
+		}
+		$this->render('signin');
+	}
 
 }
 ?>

@@ -4,9 +4,15 @@
 */
 class IndexController extends Controller
 {
+	function __construct(){
+		$this->folder = "default";
+	}
+	
 	function index()
 	{
-		echo "HELLO";
+		$data = " Xin Chào";
+		$this->render('index', $data);
 	}
+
 }
 ?>

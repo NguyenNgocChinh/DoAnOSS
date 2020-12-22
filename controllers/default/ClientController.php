@@ -157,4 +157,49 @@ class ClientController extends Controller
 		$this->render('order', $data, $title);
 	}
 
+
+
+	function orderComplete(){
+		$ten = $sdt = $quan = $dc = $type = ""; $tt = 0;
+		$num = $sp = [];
+
+		if(isset($_POST['ten'])){$ten = $_POST['ten'];}
+		if(isset($_POST['sodt'])){$sdt = $_POST['sodt'];}
+		if(isset($_POST['quan'])){$quan = $_POST['quan'];}
+		if(isset($_POST['dc'])){$dc = $_POST['dc'];}
+		if(isset($_POST['sp'])){$sp = $_POST['sp'];}
+		if(isset($_POST['num'])){$num = $_POST['num'];}
+		if(isset($_POST['type'])){$type = $_POST['type'];}
+		/*$now = date("Y-m-d h:i:s");*/
+		$now = new DateTime(null, new DateTimeZone('ASIA/Ho_Chi_Minh'));
+		$now = $now->format('Y-m-d H:i:s');
+		require_once 'vendor/Model.php';
+		require_once 'models/default/productModel.php';
+		$md = new productModel;
+		for ($i=0; $i < count($sp); $i++) {
+			$row = $md->getPrdById($sp[$i]);
+			$tt += $num[$i]*intval(preg_replace('/\s+/', '', $row['gia']));
+		}
+		date_default_timezone_set('Asia/Ho_Chi_Minh');
+		$sql = "INSERT INTO giaodich(tinhtrang,user_name,user_dst,user_addr,user_phone,tongtien,date) VALUES (0,'".$ten."','".$quan."','".$dc."','".$sdt."','".$tt."','".$now."')";		
+		$rs = $md->exe_query($sql);
+		if($rs){
+			$last_id = $md->getLastInsertID();
+			for ($i=0; $i < count($sp); $i++){
+				$data = array($last_id, $sp[$i], $num[$i]);
+				$md->insert('chitietgd',$data);
+			}
+			echo "OK";
+			$this->render('orderComplete');
+		}
+		if(!($type == "buynow")){
+			$_SESSION['cart'] = null;
+			if(isset($_SESSION['user'])){
+				$md->delete('giohang',"user_id = '".$_SESSION['user']['id']."'");
+			}
+		}
+		$this->render('orderComplete');
+	}
+
+
 }

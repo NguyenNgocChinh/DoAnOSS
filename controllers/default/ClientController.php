@@ -69,4 +69,34 @@ class ClientController extends Controller
 		}
 	}
 
+
+	function addtocart(){
+		require_once 'vendor/Model.php';
+		require_once 'models/default/productModel.php';
+		$md = new productModel;
+		$masp = array();
+		if(isset($_POST['masp'])){$masp = $_POST['masp'];}
+
+		if(isset($_SESSION['cart'])){
+			$position = array_search($md->getPrdById($masp)['masp'], $_SESSION['cart']);
+			if($position !== false){
+				array_splice($_SESSION['cart'], $position,1);
+				if(isset($_SESSION['user'])){
+					$sql = "DELETE FROM giohang WHERE user_id = ".$_SESSION['user']['id']." AND masp = ".$masp;
+					$md->exe_query($sql);
+				}
+			} else {
+				if(isset($_SESSION['user'])){
+					$sql = "INSERT INTO giohang VALUES(".$_SESSION['user']['id'].",".$masp.",1)";
+					$md->exe_query($sql);
+				}
+				$_SESSION['cart'][] = $md->getPrdById($masp)['masp'];
+			}
+			echo " ".count($_SESSION['cart']);
+		} else {
+			$_SESSION['cart'][] = $md->getPrdById($masp)['masp'];
+			echo " ".count($_SESSION['cart']);
+		}
+	}
+	
 }

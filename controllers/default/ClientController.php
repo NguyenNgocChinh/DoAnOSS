@@ -117,5 +117,21 @@ class ClientController extends Controller
 
 		$this->render('cart', $data ,$title);
 	}
-	
+
+
+
+	function delPrd(){
+		require_once 'vendor/Model.php';
+		require_once 'models/default/productModel.php';
+		$md = new productModel;
+		$masp = '';
+		if(isset($_SESSION['cart'])){$masp = $_SESSION['cart'];}
+		$dlt = array_splice($_SESSION['cart'], array_search($masp, $_SESSION['cart']), 1);
+		if(isset($_SESSION['user'])){
+			$sql = "DELETE FROM giohang WHERE user_id = ".$_SESSION['user']['id']." AND masp = ".$dlt[0];
+			$md->exe_query($sql);
+		}
+		echo " ".count($_SESSION['cart']);
+	}
+
 }

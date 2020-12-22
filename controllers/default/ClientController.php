@@ -98,5 +98,24 @@ class ClientController extends Controller
 			echo " ".count($_SESSION['cart']);
 		}
 	}
+
+
+	function viewcart(){
+		require_once 'vendor/Model.php';
+		require_once 'models/default/productModel.php';
+		$md = new productModel;
+		$data[] = array();
+		
+		if(isset($_SESSION['cart'])){
+			$title = "Giỏ hàng của bạn:";
+			for($i = 0; $i < count($_SESSION['cart']); $i++){
+				$data[] = $md->getPrdById($_SESSION['cart'][$i]);
+			}
+		} else {
+			$title = "<span class='glyphicon glyphicon-alert' style='color: #c1ac13'></span> Giỏ hàng của bạn trống!";
+		}
+
+		$this->render('cart', $data ,$title);
+	}
 	
 }

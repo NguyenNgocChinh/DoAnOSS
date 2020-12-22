@@ -134,4 +134,27 @@ class ClientController extends Controller
 		echo " ".count($_SESSION['cart']);
 	}
 
+
+	function order(){
+		require_once 'vendor/Model.php';
+		require_once 'models/default/productModel.php';
+		$md = new productModel;
+		$data[] = array();
+		$num = 0;
+		if(isset($_GET['num'])){$num = $_GET['num'];$_SESSION['num'] = $num;}
+		$title = 0;
+		
+		if(isset($_SESSION['cart'])){
+			for($i = 0; $i < count($_SESSION['cart']); $i++){
+				$row = $md->getPrdById($_SESSION['cart'][$i]);
+				$row['num'] = $num[$i];
+				$data[] = $row;
+				$pr = intval(preg_replace('/\s+/', '', $row['gia']));
+				$title += $num[$i]*$pr;
+			}
+		}
+		array_shift($data);
+		$this->render('order', $data, $title);
+	}
+
 }

@@ -202,4 +202,16 @@ class ClientController extends Controller
 	}
 
 
+	function buynow($masp){
+		require_once 'vendor/Model.php';
+		require_once 'models/default/productModel.php';
+		$md = new productModel;
+		$data = array();
+		
+		$title = "Sản phẩm của bạn:";
+		$data = $md->getPrdById($masp);
+
+		$this->render('buynow', $data ,$title);
+	}
+
 }

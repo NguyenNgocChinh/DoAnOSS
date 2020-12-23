@@ -104,6 +104,7 @@ require_once 'vendor/Model.php';
 	function viewinfo(){
 		$this->render('info');
 	}
+
 	function register(){
 		//xu ly dang ky
 		require_once 'vendor/Model.php';
@@ -187,5 +188,21 @@ session_unset();
 		header('location: ../');
 	}
 	
+
+	function editinfo(){
+		//Xu ly sua thong tin
+require_once 'vendor/Model.php';
+		require_once 'models/users/userModel.php';
+		$md = new userModel;
+		$name = $addr = $tel = $email = "";
+		if(isset($_POST['name'])){$name = $_POST['name'];}
+		if(isset($_POST['addr'])){$addr = $_POST['addr'];}
+		if(isset($_POST['tel'])){$tel = $_POST['tel'];}
+		if(isset($_POST['email'])){$email = $_POST['email'];}
+		$sql = "UPDATE thanhvien SET ten = '".$name."', diachi = '".$addr."', sodt = '".$tel."',email = '".$email."' WHERE id = ".$_SESSION['user']['id'];
+		$md->exe_query($sql);
+		$_SESSION['user'] = $md->getUserByUsername($_SESSION['user']['tentaikhoan']);
+	}
+
 	
 }

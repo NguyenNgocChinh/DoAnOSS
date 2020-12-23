@@ -181,7 +181,7 @@ require_once 'vendor/Model.php';
 	function logout(){
 		//xu ly dang xuat
 session_unset();
-		session_destro(a);
+		session_destroy();
 		unset($_COOKIE['user']);
 		setcookie('user',null,-1,'/');
 		header('location: ../');

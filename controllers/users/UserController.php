@@ -120,7 +120,7 @@ require_once 'vendor/Model.php';
 			return 0;
 		}
 		if(isset($_POST['password'])){
-			$password = $_POST['password'];
+			$password = $_POST['passwor'];
 		}
 		if(isset($_POST['cpassword'])){
 			$cpassword = $_POST['cpassword'];

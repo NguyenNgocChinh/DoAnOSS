@@ -181,7 +181,7 @@ class ClientController extends Controller
 			$tt += $num[$i]*intval(preg_replace('/\s+/', '', $row['gia']));
 		}
 		date_default_timezone_set('Asia/Ho_Chi_Minh');
-		$sql = "INSERT INTO giaodich(tinhtrang,user_name,user_dst,user_addr,user_phone,tongtien,date) VALUES (0,'".$ten."','".$quan."','".$dc."','".$sdt."','".$tt."','".$now."')";		
+		$sql = "INSERT INTO giaodich(tinhtrang,user_id,user_name,user_dst,user_addr,user_phone,tongtien,date) VALUES (0,'','".$ten."','".$quan."','".$dc."','".$sdt."','".$tt."','".$now."')";		
 		$rs = $md->exe_query($sql);
 		if($rs){
 			$last_id = $md->getLastInsertID();
@@ -189,8 +189,7 @@ class ClientController extends Controller
 				$data = array($last_id, $sp[$i], $num[$i]);
 				$md->insert('chitietgd',$data);
 			}
-			echo "OK";
-			$this->render('orderComplete');
+			//$this->render('orderComplete');
 		}
 		if(!($type == "buynow")){
 			$_SESSION['cart'] = null;
@@ -198,7 +197,7 @@ class ClientController extends Controller
 				$md->delete('giohang',"user_id = '".$_SESSION['user']['id']."'");
 			}
 		}
-		$this->render('orderComplete');
+		//$this->render('orderComplete');
 	}
 
 

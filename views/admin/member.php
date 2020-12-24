@@ -55,7 +55,7 @@
             <thead>
               <tr>
                 <th>STT</th>
-                <th>ID</th>
+                <th>Ma TV</th>
                 <th>Tên thành viên</th>
                 <th>Tên tài khoản</th>
                 <th>Địa chỉ</th>

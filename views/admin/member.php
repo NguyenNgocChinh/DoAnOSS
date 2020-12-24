@@ -55,7 +55,7 @@
             <thead>
               <tr>
                 <th>STT</th>
-                <th>Ma TV</th>
+                <th>Ma Thanh Vien</th>
                 <th>Tên thành viên</th>
                 <th>Tên tài khoản</th>
                 <th>Địa chỉ</th>

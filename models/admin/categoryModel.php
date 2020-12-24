@@ -3,7 +3,6 @@
 class categoryModel extends Model
 {
 	/*private $masp, $tensp, $gia;*/
-
 	function __construct()
 	{
 		parent::__construct();
@@ -19,4 +18,5 @@ class categoryModel extends Model
 		}
 		return $rs;
 	}
+
 }

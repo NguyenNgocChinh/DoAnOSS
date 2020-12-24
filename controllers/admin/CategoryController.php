@@ -1,5 +1,6 @@
 <?php
 
+
 /**
 * 
 */
@@ -62,3 +63,11 @@ class CategoryController extends Controller
 		}
 	}
 }
+
+class CategoryController extends Controller
+	{	
+function index(){
+echo"Day la trang";
+		}
+	}
+
